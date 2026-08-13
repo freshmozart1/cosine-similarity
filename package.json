@@ -1,6 +1,6 @@
 {
   "name": "cosine-similarity",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple package for calculation of cosine similarity of two vectors.",
   "homepage": "https://github.com/freshmozart1/cosine-similarity#readme",
   "bugs": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/freshmozart1/cosine-similarity.git"
   },
   "author": "freshmozart1",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
