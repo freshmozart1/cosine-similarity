@@ -1,12 +1,30 @@
 /**
- * A simple function to calculate the cosine similarity between two vectors.
- * @param {number[]} a 
- * @param {number[]} b 
+ * Calculate cosine similarity for equal-length vectors of finite numbers.
+ * Nonzero vectors are scaled independently to avoid magnitude overflow or
+ * underflow. A zero vector (including an empty vector) produces NaN.
+ * @param {readonly number[]} a
+ * @param {readonly number[]} b
+ * @returns {number} The cosine, subject to floating-point rounding.
  */
 export function cosineSimilarity(a, b) {
     if (a.length !== b.length) throw new Error('Vectors must be the same length');
-    const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
-    const magnitudeA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
-    const magnitudeB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
-    return dotProduct / (magnitudeA * magnitudeB);
+    let scaleA = 0;
+    let scaleB = 0;
+    for (let i = 0; i < a.length; i++) {
+        scaleA = Math.max(scaleA, Math.abs(a[i]));
+        scaleB = Math.max(scaleB, Math.abs(b[i]));
+    }
+    if (scaleA === 0 || scaleB === 0) return NaN;
+
+    let dotProduct = 0;
+    let squaredMagnitudeA = 0;
+    let squaredMagnitudeB = 0;
+    for (let i = 0; i < a.length; i++) {
+        const scaledA = a[i] / scaleA;
+        const scaledB = b[i] / scaleB;
+        dotProduct += scaledA * scaledB;
+        squaredMagnitudeA += scaledA * scaledA;
+        squaredMagnitudeB += scaledB * scaledB;
+    }
+    return dotProduct / (Math.sqrt(squaredMagnitudeA) * Math.sqrt(squaredMagnitudeB));
 }
