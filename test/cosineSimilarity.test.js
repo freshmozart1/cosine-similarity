@@ -36,27 +36,19 @@ test('subnormal component ratios retain a nontrivial angle', () => {
     assertNear(cosineSimilarity([unit, 2 * unit], [-2 * unit, -unit]), -0.8);
 });
 
-test('independent positive scaling leaves cosine unchanged', () => {
-    const a = [3, -4, 2];
-    const b = [-2, 1, 5];
-    const expected = 0;
-    for (const scaleA of [1e-200, 1, 1e200]) {
-        for (const scaleB of [1e-200, 1, 1e200]) {
-            assertNear(cosineSimilarity(a.map(value => value * scaleA), b.map(value => value * scaleB)), expected);
+for (const [name, b, expected] of [
+    ['leaves cosine unchanged', [-2, 1, 5], 0],
+    ['preserves a nonzero cosine', [2, 1, 5], 12 / Math.sqrt(29 * 30)],
+]) {
+    test(`independent positive scaling ${name}`, () => {
+        const a = [3, -4, 2];
+        for (const scaleA of [1e-200, 1, 1e200]) {
+            for (const scaleB of [1e-200, 1, 1e200]) {
+                assertNear(cosineSimilarity(a.map(value => value * scaleA), b.map(value => value * scaleB)), expected);
+            }
         }
-    }
-});
-
-test('independent positive scaling preserves a nonzero cosine', () => {
-    const a = [3, -4, 2];
-    const b = [2, 1, 5];
-    const expected = 12 / Math.sqrt(29 * 30);
-    for (const scaleA of [1e-200, 1, 1e200]) {
-        for (const scaleB of [1e-200, 1, 1e200]) {
-            assertNear(cosineSimilarity(a.map(value => value * scaleA), b.map(value => value * scaleB)), expected);
-        }
-    }
-});
+    });
+}
 
 test('swapping vectors preserves ordinary and extreme scores', () => {
     const pairs = [

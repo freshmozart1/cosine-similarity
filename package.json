@@ -14,6 +14,11 @@
   "license": "MIT",
   "type": "module",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "node --test test/cosineSimilarity.test.js"
   },
