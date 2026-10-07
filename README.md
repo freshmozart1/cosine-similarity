@@ -37,7 +37,10 @@ Existing edge behavior is unchanged:
 
 ## Development
 
-Run `npm test` with a Node.js version supporting the built-in test runner. Tests
-use only Node's built-in modules; no dependencies or provider calls are needed.
+From a repository checkout, run `npm test` with a Node.js version supporting the
+built-in test runner. Tests use only Node's built-in modules; no dependencies or
+provider calls are needed.
 The package has no build, typecheck or lint script. JavaScript ships directly from
 `index.js`, with its public declarations in `index.d.ts`.
+The installed package includes runtime code, declarations, documentation and the
+license; development tests stay in the repository.
