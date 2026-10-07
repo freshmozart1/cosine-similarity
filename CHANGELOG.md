@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.3] - 2026-10-07
+
+### Changed
+
+- Exclude development tests from the installed package while retaining runtime
+  code, TypeScript declarations, documentation and the license
+  ([PR #6](https://github.com/freshmozart1/cosine-similarity/pull/6)).
+- Consolidate duplicate scaling-test setup while preserving both zero and
+  nonzero cosine cases and all 18 scale combinations.
+- Clarify that development tests run from a repository checkout. Runtime
+  behavior and public declarations are unchanged.
+
 ## [1.0.2] - 2026-10-01
 
 ### Fixed
